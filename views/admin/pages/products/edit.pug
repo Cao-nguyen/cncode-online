@@ -1,0 +1,64 @@
+extends ../../layouts/default.pug 
+
+block main 
+
+    .main 
+        -   if (messages.validate)
+                div(
+                    class="message-validate"
+                    show-alert 
+                    data-time="5000"
+                ) #{messages.validate} <i class="fa-solid fa-x" close></i>
+                
+        -   if (messages.create)
+            div(
+                class="message-create"
+                show-alert 
+                data-time="5000"
+            ) #{messages.create} <i class="fa-solid fa-x" close></i>
+
+        form(
+            action=`/admin/products/edit/${product._id}?_method=PATCH`
+            id="form-edit-products"
+            method="POST"
+            enctype="multipart/form-data"
+        )
+            .form-group 
+                label(for="title") Tiêu đề bài viết 
+                input(
+                    type="text"
+                    class="form-item"
+                    id="title"
+                    name="name"
+                    required 
+                    value=product.name
+                ) 
+            .form-group 
+                label(for="desc") Nội dung bài viết
+                textarea(
+                    type="text"
+                    class="form-item"
+                    id="desc"
+                    name="content"
+                ) #{product.content}
+            .form-group(upload-image)
+                label(for="img") Chọn ảnh
+                input(
+                    type="file"
+                    class="form-item"
+                    id="img"
+                    name="image"
+                    accept="image/*"
+                    upload-img
+                ) 
+                .upload-preview 
+                    img(
+                        src=product.image, 
+                        alt="", 
+                        upload-img-preview)
+                    i(class="fa-solid fa-x" deletePreview)
+            .form-group 
+                button(
+                    type="submit"
+                    class="new-create"
+                ) Cập nhật

@@ -1,0 +1,99 @@
+extends ../../layouts/default.pug
+
+block main 
+    .main
+        -   if (messages.delete)
+            div(
+                class="message-delete"
+                show-alert 
+                data-time="5000"
+            ) #{messages.delete} <i class="fa-solid fa-x" close></i>
+
+        div(id="confirmBox" class="confirm-box")
+            div(class="confirm-content")
+                p Bạn có chắc chắn muốn xoá sản phẩm này không?
+                button(id="confirmYes") Xoá
+                button(id="confirmNo") Huỷ
+
+        form(id="form-search") 
+            .input 
+                input(
+                    type="text"
+                    placeholder="Bạn muốm tìm..."
+                    name="keyword"
+                    class="form-input"
+                    value=keyword
+                )
+
+                button(
+                    class="btn-search"
+                    type="submit"
+                ) Tìm kiếm
+
+        .activity
+            a(
+                href="products/create"
+                class="create-item"
+            ) + Thêm mới
+
+        table 
+            thead 
+                tr 
+                    th STT
+                    th Hình ảnh 
+                    th Tiêu đề
+                    th Nội dung 
+                    th Hành động
+            tbody  
+                each item, index in products
+                    tr 
+                        th #{index + 1}
+                        th 
+                            img(src=item.image, alt="")
+                        th #{item.name}
+                        th #{item.content}
+                        th
+                            a(
+                                href=`products/detail/${item._id}`
+                                class="btn-detail"
+                            ) Chi tiết
+                            a(
+                                href=`products/edit/${item._id}`
+                                class="btn-edit"
+                            ) Sửa
+
+                            button(
+                                class="btn-delete"
+                                button-delete
+                                data-id=item._id
+                            ) Xoá
+
+        nav.page 
+            ul.pagination 
+                if(pagination.currentPage > 1)
+                    li(class="page-item")
+                        i(
+                            class="fa-solid fa-angles-left"
+                            button-pagination = pagination.currentPage - 1
+                        )
+
+                - for (var i = 1; i <= pagination.totalPage; i++)
+                    li(class=`page-item ${pagination.currentPage == i ? "active" : ""}`)
+                        p(
+                            class="page-link"
+                            button-pagination=i
+                        ) #{i}
+
+                if(pagination.currentPage < pagination.totalPage)
+                    li(class="page-item")
+                        i(
+                            class="fa-solid fa-angles-right"
+                            button-pagination = pagination.currentPage + 1
+                        )
+
+        form(
+            action=""
+            method="POST"
+            id="form-delete-item"
+            data-path="products/delete"
+        ) 

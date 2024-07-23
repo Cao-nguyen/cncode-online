@@ -1,0 +1,11 @@
+extends ../../layouts/default.pug
+
+block main
+    h1.sp Danh sách sản phẩm 
+    .sanpham 
+        each item in products
+            .sp-tab 
+                a(href=`/products/${item.slug}`) 
+                    img(src=item.image, alt="")
+                h2 #{item.name}
+                p #{item.content}

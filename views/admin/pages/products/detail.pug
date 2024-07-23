@@ -1,0 +1,25 @@
+extends ../../layouts/default.pug 
+
+block main 
+
+    .main 
+        -   if (messages.validate)
+                div(
+                    class="message-validate"
+                    show-alert 
+                    data-time="5000"
+                ) #{messages.validate} <i class="fa-solid fa-x" close></i>
+                
+        -   if (messages.create)
+            div(
+                class="message-create"
+                show-alert 
+                data-time="5000"
+            ) #{messages.create} <i class="fa-solid fa-x" close></i>
+
+        .wapper 
+            .img 
+                img(src=product.image, alt="", style="width: 100%")
+            .content 
+                h3 #{product.name}
+                p(style="font-weight: 300") #{product.content}
