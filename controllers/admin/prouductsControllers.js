@@ -67,13 +67,13 @@ module.exports.create = async (req, res) => {
 
 // [POST] /admin/products/create
 module.exports.createPost = async (req, res) => {
-    if(!req.body.title) {
-        req.flash('validate', 'Bạn chưa nhập dữ liệu')
-        res.redirect('back')
-        return
-    }
-    
     const imageUrl = req.imageUrl;
+    
+    // if(!req.body.title) {
+    //     req.flash('validate', 'Bạn chưa nhập dữ liệu')
+    //     res.redirect('back')
+    //     return
+    // }
 
     req.body.createdAt = new Date()
     const product = new Product(req.body)
