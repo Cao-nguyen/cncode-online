@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
 const session = require('express-session')
 const methodOverride = require('method-override')
+const fileUpload = require('express-fileupload');
 const route = require('./routes/client/indexRoute')
 const routeAdmin = require('./routes/admin/indexRoute')
 const db = require('./config/database')
@@ -16,6 +17,9 @@ app.use(bodyParser.urlencoded({
     extended: false 
 }))
 app.use(bodyParser.json())
+
+// set cloudinary
+app.use(fileUpload());
 
 // set pug
 app.set('views', `${__dirname}/views`)

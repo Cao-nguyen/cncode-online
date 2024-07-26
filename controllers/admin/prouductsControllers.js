@@ -73,9 +73,8 @@ module.exports.createPost = async (req, res) => {
         return
     }
     
-    if(req.file) {
-        req.body.image = `/uploads/${req.file.filename}`
-    }
+    const imageUrl = req.imageUrl;
+
     req.body.createdAt = new Date()
     const product = new Product(req.body)
     await product.save()
@@ -100,9 +99,8 @@ module.exports.edit = async (req, res) => {
 
 // [PATCH] /admin/products/edit
 module.exports.editPatch = async (req, res) => {
-    if(req.file) {
-        req.body.image = `/uploads/${req.file.filename}`
-    }
+    const imageUrl = req.imageUrl;
+
     req.body.updatedAt = new Date()
     
     try {
@@ -115,7 +113,7 @@ module.exports.editPatch = async (req, res) => {
     res.redirect('back')
 }
 
-// [GET] /admin/products/edit
+// [GET] /admin/products/detail
 module.exports.detail = async (req, res) => {
     const find = {
         deleted: false,
