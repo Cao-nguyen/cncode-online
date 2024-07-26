@@ -67,14 +67,15 @@ module.exports.create = async (req, res) => {
 
 // [POST] /admin/products/create
 module.exports.createPost = async (req, res) => {
-    const imageUrl = req.imageUrl;
+    const { file } = req;
+    const imageUrl = file.path;
     
     // if(!req.body.title) {
     //     req.flash('validate', 'Bạn chưa nhập dữ liệu')
     //     res.redirect('back')
     //     return
     // }
-
+    req.body.image = imageUrl
     req.body.createdAt = new Date()
     const product = new Product(req.body)
     await product.save()
