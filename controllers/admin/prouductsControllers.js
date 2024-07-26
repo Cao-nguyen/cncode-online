@@ -1,6 +1,6 @@
 const Product = require('../../models/productsModel');
 const { listmongoose } = require('../../util/mongoose');
-const { onemongoose } = require('../../util/mongoose')
+const { onemongoose } = require('../../util/mongoose');
 
 // [GET] /admin/products
 module.exports.index = async (req, res, next) => {
@@ -35,7 +35,6 @@ module.exports.index = async (req, res, next) => {
 
     obJectPagination.totalPage = totalPage
 
-
     // Lấy dữ liệu in ra giao diện
     const products = await Product.find(find).limit(obJectPagination.limitItem).skip(obJectPagination.skip)
 
@@ -67,20 +66,27 @@ module.exports.create = async (req, res) => {
 
 // [POST] /admin/products/create
 module.exports.createPost = async (req, res) => {
-    const { file } = req;
-    const imageUrl = file.path;
-    
-    // if(!req.body.title) {
-    //     req.flash('validate', 'Bạn chưa nhập dữ liệu')
-    //     res.redirect('back')
-    //     return
-    // }
-    req.body.image = imageUrl
-    req.body.createdAt = new Date()
-    const product = new Product(req.body)
-    await product.save()
-    req.flash('create', 'Bạn đã thêm sản phẩm thành công!')
-    res.redirect('/admin/products/create')
+    try {
+        const { file } = req;
+        if (!file) {
+            req.flash('create', 'File image is required!');
+            return res.redirect('back');
+        }
+        
+        const imageUrl = file.path;
+        req.body.image = imageUrl;
+        req.body.createdAt = new Date();
+        
+        const product = new Product(req.body);
+        await product.save();
+        
+        req.flash('create', 'Bạn đã thêm sản phẩm thành công!');
+        res.redirect('/admin/products/create');
+    } catch (error) {
+        console.error('Create product error:', error);
+        req.flash('create', 'Đã xảy ra lỗi trong quá trình thêm sản phẩm!');
+        res.redirect('back');
+    }
 }
 
 // [GET] /admin/products/edit
