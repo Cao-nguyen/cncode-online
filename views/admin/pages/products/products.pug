@@ -51,7 +51,7 @@ block main
                         th 
                             img(src=item.image, alt="")
                         th #{item.name}
-                        th #{item.content}
+                        th !{item.content}
                         th
                             a(
                                 href=`products/detail/${item._id}`

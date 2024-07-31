@@ -1,4 +1,5 @@
 const express = require('express')
+const path = require('path')
 const flash = require('express-flash')
 const cookieParser = require('cookie-parser')
 const bodyParser = require('body-parser')
@@ -13,7 +14,7 @@ const port = process.env.PORT
 
 // fix lỗi không hiển thị được json khi dùng POST
 app.use(bodyParser.urlencoded({ 
-    extended: false 
+    extended: false
 }))
 app.use(bodyParser.json())
 
@@ -26,6 +27,9 @@ app.use(express.static(`${__dirname}/public`))
 app.use(cookieParser('WSweb'));
 app.use(session({ cookie: { maxAge: 60000 }}));
 app.use(flash())
+
+// TinyMCE
+app.use('/tinymce', express.static(path.join(__dirname, 'node_modules', 'tinymce')))
 
 // set methodOverride
 app.use(methodOverride('_method'))

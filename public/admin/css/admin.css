@@ -15,6 +15,13 @@
     --box-shadow-01: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
+/* tinyMCE */
+blockquote {
+    border-left: 4px solid #0066cc; /* Đường viền xanh dương */
+    padding: 7px 15px;
+    font-style: italic;
+}
+
 /* Header */
 header{
     min-width: 1500px;
