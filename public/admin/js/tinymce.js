@@ -1,7 +1,7 @@
 tinymce.init({
     selector: 'textarea.tinymce',
-    height: 500,
-    width: '100%',
+    valid_elements: '*[*]',
+    extended_valid_elements: 'a[href|target=_blank]',
     plugins: 'quote codesample advlist autolink lists link image charmap print preview anchor searchreplace visualblocks code fullscreen insertdatetime media table paste help wordcount',
     toolbar: 'bold italic backcolor quote | formatselect | image table | link codesample | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | removeformat | undo redo',
     menubar: false,
