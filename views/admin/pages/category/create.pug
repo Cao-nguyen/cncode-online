@@ -1,0 +1,60 @@
+extends ../../layouts/default.pug 
+
+block main 
+
+    .main 
+        form(
+            action="/admin/category/create"
+            method="POST"
+            enctype="multipart/form-data"
+        )
+            .form-group 
+                label(for="title") Tiêu đề
+                input(
+                    type="text"
+                    class="form-item"
+                    id="title"
+                    name="name"
+                    required 
+                ) 
+            .form-group 
+                label(for="parent_id") Danh mục cha
+                input(
+                    type="text"
+                    class="form-item"
+                    id="parent_id"
+                    name="parent_id"
+                ) 
+            .form-group 
+                label(for="desc") Nhập mô tả
+                textarea(
+                    type="text"
+                    class="form-item tinymce"
+                    id="desc"
+                    name="description"
+                ) 
+            .form-group 
+                label(for="pos") Vị trí
+                input(
+                    type="number"
+                    class="form-item"
+                    id="pos"
+                    name="position"
+                ) 
+            .form-group(upload-image)
+                label(for="img") Chọn ảnh
+                input(
+                    type="file"
+                    class="form-item"
+                    id="img"
+                    name="image"
+                    upload-img
+                ) 
+                .upload-preview 
+                    img(src="", alt="", upload-img-preview)
+                    i(class="fa-solid fa-x" deletePreview)
+            .form-group 
+                button(
+                    type="submit"
+                    class="new-create"
+                ) Đăng bài viết

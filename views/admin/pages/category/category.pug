@@ -10,6 +10,45 @@ block main
 
         .activity
             a(
-                href="products/create"
+                href="category/create"
                 class="create-item"
             ) + Thêm mới
+
+        table 
+            thead 
+                tr 
+                    th STT
+                    th Hình ảnh 
+                    th Tiêu đề
+                    th Vị trí
+                    th Hành động
+            tbody  
+                each item, index in category
+                    tr 
+                        th #{index + 1}
+                        th 
+                            img(src=item.image alt="")
+                        th #{item.name}
+                        th 
+                            input(
+                                type="number"
+                                value=item.position 
+                                style="width: 60px"
+                                min="1"
+                                name="position"
+                            )
+                        th
+                            a(
+                                href=`category/detail/${item._id}`
+                                class="btn-detail"
+                            ) Chi tiết
+                            a(
+                                href=`category/edit/${item._id}`
+                                class="btn-edit"
+                            ) Sửa
+
+                            button(
+                                class="btn-delete"
+                                button-delete
+                                data-id=item._id
+                            ) Xoá
