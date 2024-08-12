@@ -1,20 +1,24 @@
 const Category = require('../../models/categoryModel');
+const createTree = require('../../helpers/createTree')
 const { listmongoose } = require('../../util/mongoose');
 const { onemongoose } = require('../../util/mongoose')
 
 // [GET] /category
 module.exports.category = async (req, res, next) => {
-    let find = {
-        deleted: false
+    try {
+        let find = { deleted: false };
+
+        const categories = await Category.find(find);
+
+        const newCategory = createTree.tree(categories);
+
+        res.render('admin/pages/category/category', { 
+            pageTitle: 'Danh mục',
+            category: newCategory
+        });
+    } catch (error) {
+        next(error);
     }
-
-    // Lấy dữ liệu in ra giao diện
-    const categories = await Category.find(find)
-
-    res.render('admin/pages/category/category', { 
-        pageTitle: 'Danh mục',
-        category: listmongoose(categories)
-    })
 }
 
 // [GET] /category/create
@@ -23,25 +27,8 @@ module.exports.create = async (req, res, next) => {
         let find = { deleted: false };
 
         const categories = await Category.find(find);
-        console.log('Categories:', categories);  // In ra để kiểm tra
 
-        function createTree(arr, parentId = "") {
-            const tree = [];
-            arr.forEach((item) => {
-                if (item.parent_id === parentId) {
-                    const newItem = { ...item._doc };  // Lấy đối tượng thô
-                    const children = createTree(arr, item._id);
-                    if (children.length > 0) {
-                        newItem.children = children;
-                    }
-                    tree.push(newItem);
-                }
-            });
-            return tree;
-        }
-
-        const newCategory = createTree(categories);
-        console.log('Category Tree:', newCategory);  // In ra để kiểm tra
+        const newCategory = createTree.tree(categories);
 
         res.render('admin/pages/category/create', { 
             pageTitle: 'Tạo danh mục',

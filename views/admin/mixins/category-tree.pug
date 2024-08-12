@@ -1,0 +1,33 @@
+mixin category-tree(items, level = 0)
+    each item, index in items
+        - const prefix = Array(level + 1).join("-- ")
+        tr 
+            th #{item.index}
+            th 
+                img(src=item.image alt="")
+            th #{prefix}#{item.name}
+            th 
+                input(
+                    type="number"
+                    value=item.position 
+                    style="width: 60px; padding: 5px 5px"
+                    min="1"
+                    name="position"
+                )
+            th
+                a(
+                    href=`category/detail/${item._id}`
+                    class="btn-detail"
+                ) Chi tiết
+                a(
+                    href=`category/edit/${item._id}`
+                    class="btn-edit"
+                ) Sửa
+
+                button(
+                    class="btn-delete"
+                    button-delete
+                    data-id=item._id
+                ) Xoá
+        if item.children && item.children.length > 0
+            +category-tree(item.children, level + 1)

@@ -1,6 +1,6 @@
-mixin select-tree(items, level = 1)
+mixin select-tree(items, level = 0)
     each item in items
-        - const prefix = Array(level + 1).join("__ ");
+        - const prefix = Array(level + 1).join("-- ");
         option(value=item._id) #{prefix}#{item.name}
             if item.children && item.children.length > 0
                 +select-tree(item.children, level + 1)
