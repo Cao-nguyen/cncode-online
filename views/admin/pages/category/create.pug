@@ -1,7 +1,7 @@
 extends ../../layouts/default.pug 
+include ../../mixins/select-tree.pug
 
 block main 
-
     .main 
         form(
             action="/admin/category/create"
@@ -19,16 +19,18 @@ block main
                 ) 
             .form-group 
                 label(for="parent_id") Danh mục cha
-                input(
-                    type="text"
-                    class="form-item"
-                    id="parent_id"
+                select(
                     name="parent_id"
+                    id="parent_id"
+                    class="form-item"
+                    style="width: 100%; padding: 10px 5px; font-size: 16px"
                 ) 
+                    option(value="") -- Chọn danh mục cha --
+                    if category && category.length > 0
+                        +select-tree(category)
             .form-group 
                 label(for="desc") Nhập mô tả
                 textarea(
-                    type="text"
                     class="form-item tinymce"
                     id="desc"
                     name="description"

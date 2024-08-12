@@ -19,10 +19,39 @@ module.exports.category = async (req, res, next) => {
 
 // [GET] /category/create
 module.exports.create = async (req, res, next) => {
-    res.render('admin/pages/category/create', { 
-        pageTitle: 'Tạo danh mục'
-    })
-}
+    try {
+        let find = { deleted: false };
+
+        const categories = await Category.find(find);
+        console.log('Categories:', categories);  // In ra để kiểm tra
+
+        function createTree(arr, parentId = "") {
+            const tree = [];
+            arr.forEach((item) => {
+                if (item.parent_id === parentId) {
+                    const newItem = { ...item._doc };  // Lấy đối tượng thô
+                    const children = createTree(arr, item._id);
+                    if (children.length > 0) {
+                        newItem.children = children;
+                    }
+                    tree.push(newItem);
+                }
+            });
+            return tree;
+        }
+
+        const newCategory = createTree(categories);
+        console.log('Category Tree:', newCategory);  // In ra để kiểm tra
+
+        res.render('admin/pages/category/create', { 
+            pageTitle: 'Tạo danh mục',
+            category: newCategory
+        });
+    } catch (error) {
+        next(error);
+    }
+};
+
 
 // [POST] /admin/category/create
 module.exports.createPost = async (req, res) => {
