@@ -7,5 +7,6 @@ const controllers = require('../../controllers/admin/categoryControllers')
 router.get('/', controllers.category)
 router.get('/create', controllers.create)
 router.post('/create', upload.single('image'), controllers.createPost)
+router.get('/edit/:id', controllers.edit)
 
 module.exports = router
