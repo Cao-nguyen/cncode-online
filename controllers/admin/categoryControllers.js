@@ -71,15 +71,15 @@ module.exports.createPost = async (req, res) => {
 // [GET] /admin/category/edit
 module.exports.edit = async (req, res, next) => {
     try {
-        let find = { deleted: false };
-
-        const categories = await Category.find(find);
-
-        const newCategory = createTree.tree(categories);
+        const id = req.params.id;
+        const categories = await Category.findOne({
+            _id: id,
+            deleted: false
+        })
 
         res.render('admin/pages/category/edit', { 
             pageTitle: 'Chỉnh sửa danh mục',
-            category: newCategory
+            category: categories
         });
     } catch (error) {
         next(error);

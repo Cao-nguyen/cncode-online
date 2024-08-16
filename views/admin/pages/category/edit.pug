@@ -8,6 +8,7 @@ block main
             method="POST"
             enctype="multipart/form-data"
         )
+
             .form-group 
                 label(for="title") Tiêu đề
                 input(
@@ -15,6 +16,7 @@ block main
                     class="form-item"
                     id="title"
                     name="name"
+                    value=category.name
                     required 
                 ) 
             .form-group 
@@ -42,6 +44,7 @@ block main
                     class="form-item"
                     id="pos"
                     name="position"
+                    value=category.position
                 ) 
             .form-group(upload-image)
                 label(for="img") Chọn ảnh
@@ -53,7 +56,7 @@ block main
                     upload-img
                 ) 
                 .upload-preview 
-                    img(src="", alt="", upload-img-preview)
+                    img(src=category.image, alt="", upload-img-preview)
                     i(class="fa-solid fa-x" deletePreview)
             .form-group 
                 button(
