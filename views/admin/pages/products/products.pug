@@ -47,7 +47,7 @@ block main
             tbody  
                 each item, index in products
                     tr 
-                        th #{index + 1}
+                        th #{pagination.limitItem * (pagination.currentPage -1) + (index + 1)}
                         th 
                             img(src=item.image, alt="")
                         th #{item.name}
