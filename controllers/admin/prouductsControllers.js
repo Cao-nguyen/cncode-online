@@ -1,3 +1,5 @@
+const createTree = require('../../helpers/createTree')
+const Category = require('../../models/categoryModel');
 const Product = require('../../models/productsModel');
 const { listmongoose } = require('../../util/mongoose');
 const { onemongoose } = require('../../util/mongoose');
@@ -59,9 +61,20 @@ module.exports.deleteItem = async (req, res) => {
 
 // [GET] /admin/products/create
 module.exports.create = async (req, res) => {
-    res.render('admin/pages/products/create', { 
-        pageTitle: 'Tạo mới sản phẩm',
-    })
+    try {
+        let find = { deleted: false };
+
+        const categories = await Category.find(find);
+
+        const newCategory = createTree.tree(categories);
+
+        res.render('admin/pages/products/create', { 
+            pageTitle: 'Tạo mới sản phẩm',
+            category: newCategory
+        })
+    } catch (error) {
+        next(error);
+    }
 }
 
 // [POST] /admin/products/create
