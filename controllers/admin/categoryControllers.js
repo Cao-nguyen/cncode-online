@@ -71,16 +71,45 @@ module.exports.createPost = async (req, res) => {
 // [GET] /admin/category/edit
 module.exports.edit = async (req, res, next) => {
     try {
+        let find = {
+            deleted: false
+        }
+
         const id = req.params.id;
-        const categories = await Category.findOne({
+        const data = await Category.findOne({
             _id: id,
             deleted: false
         })
 
+        const categories = await Category.find(find)
+
+        const newCategory = createTree.tree(categories);
+
         res.render('admin/pages/category/edit', { 
             pageTitle: 'Chỉnh sửa danh mục',
-            category: categories
+            data: data,
+            category: newCategory
         });
+    } catch (error) {
+        res.redirect('/admin/category')
+    }
+}
+
+// [PATCH] /admin/category/edit
+module.exports.editPatch = async (req, res, next) => {
+    try {
+        let find = {
+            deleted: false
+        }
+
+        const id = req.params.id;
+
+        req.body.position = parseInt(req.body.position)
+
+        await Category.updateOne({ _id: id }, req.body)
+        
+        res.redirect('back')
+
     } catch (error) {
         next(error);
     }

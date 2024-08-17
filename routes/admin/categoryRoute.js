@@ -8,5 +8,6 @@ router.get('/', controllers.category)
 router.get('/create', controllers.create)
 router.post('/create', upload.single('image'), controllers.createPost)
 router.get('/edit/:id', controllers.edit)
+router.patch('/edit/:id', upload.single('image'), controllers.editPatch)
 
 module.exports = router

@@ -4,7 +4,7 @@ include ../../mixins/select-tree.pug
 block main 
     .main 
         form(
-            action="/admin/category/create"
+            action=`/admin/category/edit/${data._id}?_method=PATCH`
             method="POST"
             enctype="multipart/form-data"
         )
@@ -16,7 +16,7 @@ block main
                     class="form-item"
                     id="title"
                     name="name"
-                    value=category.name
+                    value=data.name
                     required 
                 ) 
             .form-group 
@@ -29,7 +29,7 @@ block main
                 ) 
                     option(value="") -- Chọn danh mục cha --
                     if category && category.length > 0
-                        +select-tree(category)
+                        +select-tree(category, 1, data.parent_id)
             .form-group 
                 label(for="desc") Nhập mô tả
                 textarea(
@@ -44,7 +44,7 @@ block main
                     class="form-item"
                     id="pos"
                     name="position"
-                    value=category.position
+                    value=data.position
                 ) 
             .form-group(upload-image)
                 label(for="img") Chọn ảnh
@@ -56,10 +56,10 @@ block main
                     upload-img
                 ) 
                 .upload-preview 
-                    img(src=category.image, alt="", upload-img-preview)
+                    img(src=data.image, alt="", upload-img-preview)
                     i(class="fa-solid fa-x" deletePreview)
             .form-group 
                 button(
                     type="submit"
                     class="new-create"
-                ) Đăng bài viết
+                ) Cập nhật
