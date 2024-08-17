@@ -104,17 +104,26 @@ module.exports.createPost = async (req, res) => {
 
 // [GET] /admin/products/edit
 module.exports.edit = async (req, res) => {
-    const find = {
-        deleted: false,
-        _id: req.params.id
+    try {
+        const find = { 
+            deleted: false, 
+            _id: req.params.id
+        };
+
+        const product = await Product.findOne(find)
+
+        const categories = await Category.find({ deleted: false });
+
+        const newCategory = createTree.tree(categories);
+
+        res.render('admin/pages/products/edit', { 
+            pageTitle: 'Chỉnh sửa sản phẩm',
+            product: onemongoose(product),
+            category: newCategory
+        })
+    } catch (error) {
+        next(error);
     }
-
-    const product = await Product.findOne(find)
-
-    res.render('admin/pages/products/edit', { 
-        pageTitle: 'Chỉnh sửa sản phẩm',
-        product: onemongoose(product)
-    })
 }
 
 // [PATCH] /admin/products/edit
