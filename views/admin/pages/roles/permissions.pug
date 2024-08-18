@@ -3,6 +3,8 @@ extends ../../layouts/default.pug
 block main 
     .main
         if (roles)
+            div(data-roles=roles)
+
             .activity
                 button(
                     type="submit"
@@ -23,7 +25,7 @@ block main
                     tr(data-name="id")
                         td.section-item 
                             each item in roles
-                                input(type="text", value=item._id, readonly)
+                                input(type="text", value=item._id, style="display: none")
                     tr.section-header
                         td.colspan-3 Bài viết
 

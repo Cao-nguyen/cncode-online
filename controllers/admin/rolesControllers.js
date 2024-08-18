@@ -74,30 +74,14 @@ module.exports.permissions = async (req, res, next) => {
 // [PATCH] /admin/roles/permissions
 module.exports.permissionsPatch = async (req, res, next) => {
     try {
-        // Kiểm tra xem req.body.permissions có tồn tại không
-        if (!req.body.permissions) {
-            throw new Error("No permissions data provided");
-        }
+        if (!req.body.permissions) throw new Error("No permissions data provided");
 
-        // Phân tích JSON và xử lý lỗi phân tích
-        let permissions;
-        try {
-            permissions = JSON.parse(req.body.permissions);
-        } catch (error) {
-            throw new Error("Invalid JSON format");
-        }
+        const permissions = JSON.parse(req.body.permissions);
 
-        // Cập nhật từng quyền
-        for (const item of permissions) {
-            if (!item.id || !Array.isArray(item.permission)) {
-                throw new Error("Invalid data structure");
-            }
+        for (const { id, permission } of permissions) {
+            if (!id || !Array.isArray(permission)) throw new Error("Invalid data structure");
 
-            const result = await Role.updateOne(
-                { _id: item.id },
-                { $set: { permissions: item.permission } }
-            );
-            console.log(result);
+            await Role.updateOne({ _id: id }, { $set: { permissions: permission } });
         }
 
         res.redirect('back');

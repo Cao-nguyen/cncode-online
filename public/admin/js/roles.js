@@ -1,5 +1,5 @@
+// Permission
 const tablePermission = document.querySelector("[permission-table]");
-
 if (tablePermission) {
     const buttonSubmit = document.querySelector("[button-submit]");
 
@@ -42,4 +42,22 @@ if (tablePermission) {
             formChangePermission.submit();
         }
     });
+}
+
+// Checked
+const dataRoles = document.querySelector("[data-roles]")
+if(dataRoles) {
+    const roles = JSON.parse(dataRoles.getAttribute("data-roles"))
+    const tablePermission = document.querySelector("[permission-table]");
+
+    roles.forEach((role, index) => {
+        const permissions = role.permissions
+
+        permissions.forEach(permission => {
+            const row = tablePermission.querySelector(`[data-name="${permission}"]`)
+            const input = row.querySelectorAll("input")[index]
+
+            input.checked = true
+        })
+    })
 }
