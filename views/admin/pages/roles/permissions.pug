@@ -1,0 +1,65 @@
+extends ../../layouts/default.pug
+
+block main 
+    .main
+        if (roles)
+            .activity
+                button(
+                    type="submit"
+                    class="create-item"
+                    button-submit
+                ) Cập nhật
+
+            table(
+                class="permission-table"
+                permission-table
+            )
+                thead
+                    tr.table-header
+                        th Chọn tất cả
+                        each item in roles
+                            th #{item.name}
+                tbody
+                    tr(data-name="id")
+                        td.section-item 
+                            each item in roles
+                                input(type="text", value=item._id, readonly)
+                    tr.section-header
+                        td.colspan-3 Bài viết
+
+                    tr(data-name="products_view")
+                        td.section-item Xem
+                        each item in roles
+                            td.text-center
+                                input(type="checkbox", data-permission="products_view")
+
+                    tr(data-name="products_create")
+                        td.section-item Thêm mới
+                        each item in roles
+                            td.text-center
+                                input(type="checkbox", data-permission="products_create")
+
+                    tr(data-name="products_edit")
+                        td.section-item Chỉnh sửa
+                        each item in roles
+                            td.text-center
+                                input(type="checkbox", data-permission="products_edit")
+
+                    tr(data-name="products_delete")
+                        td.section-item Xoá
+                        each item in roles
+                            td.text-center
+                                input(type="checkbox", data-permission="products_delete")
+    
+    form(
+        id="form-change-permission"
+        method="POST"
+        action="/admin/roles/permissions?_method=PATCH"
+    ) 
+        .form-group
+            input(
+                type="hidden"
+                name="permissions"
+            )
+    
+    script(src="/admin/js/roles.js")

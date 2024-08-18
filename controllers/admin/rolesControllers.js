@@ -56,3 +56,53 @@ module.exports.editPatch = async (req, res, next) => {
 
     res.redirect('back')
 }
+
+// [GET] /admin/roles/permissions
+module.exports.permissions = async (req, res, next) => {
+    let find = {
+        deleted: false
+    }
+
+    const roles = await Role.find(find)
+
+    res.render('admin/pages/roles/permissions', { 
+        pageTitle: 'Phân quyền',
+        roles: roles
+    })
+}
+
+// [PATCH] /admin/roles/permissions
+module.exports.permissionsPatch = async (req, res, next) => {
+    try {
+        // Kiểm tra xem req.body.permissions có tồn tại không
+        if (!req.body.permissions) {
+            throw new Error("No permissions data provided");
+        }
+
+        // Phân tích JSON và xử lý lỗi phân tích
+        let permissions;
+        try {
+            permissions = JSON.parse(req.body.permissions);
+        } catch (error) {
+            throw new Error("Invalid JSON format");
+        }
+
+        // Cập nhật từng quyền
+        for (const item of permissions) {
+            if (!item.id || !Array.isArray(item.permission)) {
+                throw new Error("Invalid data structure");
+            }
+
+            const result = await Role.updateOne(
+                { _id: item.id },
+                { $set: { permissions: item.permission } }
+            );
+            console.log(result);
+        }
+
+        res.redirect('back');
+    } catch (error) {
+        console.error("Error updating permissions:", error.message);
+        res.status(500).send("Internal Server Error");
+    }
+};

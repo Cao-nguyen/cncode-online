@@ -420,3 +420,43 @@ a.create-item:hover{
     cursor: pointer;
     /* display: none; */
 }
+
+/* Permission */
+.permission-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.permission-table th, 
+.permission-table td {
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.permission-table thead th {
+    background-color: #f2f2f2;
+    font-weight: bold;
+    color: #333;
+}
+
+.permission-table tbody tr:nth-child(even) {
+    background-color: #fafafa;
+}
+
+.permission-table .section-header td {
+    background-color: #e9ecef;
+    font-weight: bold;
+    text-align: left;
+    padding-left: 10px;
+}
+
+.permission-table .section-item {
+    text-align: left;
+    padding-left: 20px;
+}
+
+.permission-table input[type="checkbox"] {
+    cursor: pointer;
+}
