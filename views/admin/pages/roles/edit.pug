@@ -1,0 +1,34 @@
+extends ../../layouts/default.pug 
+
+block main 
+
+    .main 
+        form(
+            action=`/admin/roles/edit/${roles._id}?_method=PATCH`
+            method="POST"
+        )
+            .form-group 
+                label(for="name") Tiêu đề
+                input(
+                    type="text"
+                    class="form-item"
+                    id="name"
+                    name="name"
+                    value=roles.name
+                    required 
+                ) 
+            .form-group 
+                label(for="content") Mô tả ngắn
+                input(
+                    type="text"
+                    class="form-item"
+                    id="content"
+                    name="content"
+                    value=roles.content
+                    required 
+                ) 
+            .form-group 
+                button(
+                    type="submit"
+                    class="new-create"
+                ) Cập nhật

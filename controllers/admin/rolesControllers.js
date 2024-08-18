@@ -30,3 +30,29 @@ module.exports.createPost = async (req, res, next) => {
     
     res.redirect('/admin/roles')
 }
+
+// [GET] /admin/roles/edit
+module.exports.edit = async (req, res, next) => {
+    const id = req.params.id
+
+    let find = {
+        _id: id,
+        deleted: false
+    }
+
+    const roles = await Role.findOne(find)
+
+    res.render('admin/pages/roles/edit', { 
+        pageTitle: 'Sửa nhóm quyền',
+        roles: roles
+    })
+}
+
+// [PATCH] /admin/roles/edit
+module.exports.editPatch = async (req, res, next) => {
+    const id = req.params.id 
+
+    await Role.updateOne({ _id: id }, req.body)
+
+    res.redirect('back')
+}
