@@ -1,0 +1,58 @@
+extends ../../layouts/default.pug
+
+block main 
+    .main
+
+        //- div(id="confirmBox" class="confirm-box")
+        //-     div(class="confirm-content")
+        //-         p Bạn có chắc chắn muốn xoá sản phẩm này không?
+        //-         button(id="confirmYes") Xoá
+        //-         button(id="confirmNo") Huỷ
+        .activity
+            a(
+                href="accounts/create"
+                class="create-item"
+            ) + Thêm mới
+
+        table 
+            thead 
+                tr 
+                    th STT
+                    th Họ và tên
+                    th Phân quyền
+                    th Email
+                    th Trạng thái
+                    th Hành động
+            tbody
+                if(accounts.length > 0)
+                    each item, index in accounts
+                        tr 
+                            th #{index + 1}
+                            th #{item.fullName}
+                            th #{item.role.name}
+                            th #{item.email} 
+                            th #{item.status}
+                            th
+                                a(
+                                    href=`roles/detail/${item._id}`
+                                    class="btn-detail"
+                                ) Chi tiết
+                                a(
+                                    href=`roles/edit/${item._id}`
+                                    class="btn-edit"
+                                ) Sửa
+
+                                button(
+                                    class="btn-delete"
+                                    button-delete
+                                    data-id=item._id
+                                ) Xoá
+                else 
+                    tr 
+                        th Chưa có tài khoản được tạo...
+        form(
+            action=""
+            method="POST"
+            id="form-delete-item"
+            data-path="accounts/delete"
+        ) 

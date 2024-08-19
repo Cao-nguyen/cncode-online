@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --inspect=1930 index.js"
+    "dev": "nodemon --inspect=1929 index.js"
   },
   "author": "",
   "license": "ISC",
@@ -17,6 +17,7 @@
     "express-fileupload": "^1.5.1",
     "express-flash": "0.0.2",
     "express-session": "^1.18.0",
+    "md5": "^2.3.0",
     "method-override": "^3.0.0",
     "mongodb": "^6.8.0",
     "mongoose": "^5.9.27",

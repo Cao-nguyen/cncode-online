@@ -13,18 +13,9 @@ const Accounts = new Schema({
     role_id: { type: String },
     status: { type: String },
     deleted: { type: String, default: false },
-    deletedAt: { 
-        type: Date,
-        get: setDate
-    },
-    createdAt: { 
-        type: Date,
-        get: setDate
-    },
-    updatedAt: { 
-        type: Date,
-        get: setDate
-    }
+}, 
+{
+    timestamps: { default: true, get: setDate }
 }, { toJSON: { getters: true }, toObject: { getters: true } })
 
 module.exports = mongoose.model('accounts', Accounts);
