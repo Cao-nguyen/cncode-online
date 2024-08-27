@@ -60,3 +60,40 @@ module.exports.createPost = async (req, res, next) => {
         next(error)
     }
 }
+
+// [GET] /admin/accounts/edit
+module.exports.edit = async (req, res, next) => {
+    const id = req.params.id
+
+    let find = {
+        _id: id,
+        deleted: false
+    }
+
+    const accounts = await Accounts.findOne(find)
+
+    const roles = await Role.find({
+        deleted: false
+    })
+
+    res.render('admin/pages/accounts/edit', { 
+        pageTitle: 'Sửa tài khoản',
+        accounts: accounts,
+        roles: roles
+    })
+}
+
+// [PATCH] /admin/accounts/edit
+module.exports.editPatch = async (req, res, next) => {
+    const id = req.params.id
+
+    if(req.body.password) {
+        req.body.password = md5(req.body.password)
+    } else {
+        delete req.body.password
+    }
+
+    await Accounts.updateOne({ _id: id}, req.body)
+
+    res.redirect("back")
+}

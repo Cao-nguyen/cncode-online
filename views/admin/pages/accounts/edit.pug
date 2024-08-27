@@ -1,0 +1,78 @@
+extends ../../layouts/default.pug 
+
+block main 
+
+    .main 
+        -   if (messages.error)
+            div(
+                class="message-delete"
+                show-alert 
+                data-time="5000"
+            ) #{messages.error} <i class="fa-solid fa-x" close></i>
+
+
+        form(
+            action=`/admin/accounts/edit/${accounts._id}?_method=PATCH`
+            method="POST"
+        )
+            .form-group 
+                label(for="name") Họ và tên*
+                input(
+                    type="text"
+                    class="form-item"
+                    id="fullName"
+                    name="fullName"
+                    value=accounts.fullName
+                    required 
+                ) 
+            .form-group 
+                label(for="content") Email
+                input(
+                    type="email"
+                    class="form-item"
+                    id="email"
+                    name="email"
+                    value=accounts.email
+                    required 
+                ) 
+            .form-group 
+                label(for="content") Password
+                input(
+                    type="password"
+                    class="form-item"
+                    id="password"
+                    name="password"
+                ) 
+            .form-group 
+                label(for="content") Phân quyền
+                select(name="role_id" id="role_id")
+                    option(disabled) -- Chọn --
+                    each item in roles
+                        option(
+                            value=item._id
+                            selected=(item._id == item.role_id ? true : false)
+                        ) #{item.name}
+            .form-group 
+                input(
+                    type="radio"
+                    class="form-input-check"
+                    id="statusActive"
+                    name="status"
+                    value="active"
+                    checked
+                )
+                label(for="statusActive" class="form-check-label") Hoạt động
+            .form-group 
+                input(
+                    type="radio"
+                    class="form-input-check"
+                    id="statusActive"
+                    name="status"
+                    value="inactive"
+                )
+                label(for="statusActive" class="form-check-label") Dừng hoạt động
+            .form-group 
+                button(
+                    type="submit"
+                    class="new-create"
+                ) Thêm quyền
