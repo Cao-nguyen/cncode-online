@@ -1,3 +1,25 @@
-extends ../../layouts/default.pug
+extends ../../layouts/auth.pug
 
 block main 
+    -   if (messages.error)
+            div(
+                class="message-error"
+                show-alert 
+                data-time="5000"
+            ) #{messages.error} <i class="fa-solid fa-x" close></i>
+
+    .login-container
+        .login-box
+            h2 Trang Admin
+            form(
+                action="/admin/auth/login" 
+                method="POST"
+            )
+                .input-group
+                    label(for="email") Email
+                    input(type="text" name="email" id="email" required)
+                .input-group
+                    label(for="password") Mật khẩu
+                    input(type="password" name="password" id="password" required)
+                .input-group
+                    button(type="submit") Đăng nhập
