@@ -3,9 +3,13 @@ const Accounts = require('../../models/accountsModel')
 
 //[GET] /admin/auth/login
 module.exports.login = async (req, res, next) => {
-    res.render('admin/pages/auth/login', { 
-        pageTitle: 'Đăng nhập',
-    });
+    if(req.cookies.token) {
+        res.redirect('/admin/dashboard')
+    } else {
+        res.render('admin/pages/auth/login', { 
+            pageTitle: 'Đăng nhập',
+        });
+    }
 }
 
 //[POST] /admin/auth/login

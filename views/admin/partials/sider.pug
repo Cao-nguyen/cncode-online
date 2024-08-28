@@ -8,10 +8,11 @@
             a.sider-link(href="/admin/dashboard")
                 i(class="fa-solid fa-table-columns")
                 p Tổng quan 
-        .sider-item 
-            a.sider-link(href="/admin/products")
-                i(class="fa-solid fa-box")
-                p Sản phẩm 
+        if(role.permissions.includes("products_view"))    
+            .sider-item 
+                a.sider-link(href="/admin/products")
+                    i(class="fa-solid fa-box")
+                    p Sản phẩm 
         .sider-item 
             a.sider-link(href="/admin/category")
                 i(class="fa-solid fa-tag")
