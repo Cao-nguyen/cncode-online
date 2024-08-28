@@ -18,6 +18,18 @@ module.exports.loginPost = async (req, res, next) => {
         deleted: false
     })
 
+    if(!req.body.email) {
+        req.flash('error', 'Vui lòng nhập email')
+        res.redirect('back')
+        return
+    }
+
+    if(!req.body.password) {
+        req.flash('error', 'Vui lòng nhập mật khẩu')
+        res.redirect('back')
+        return
+    }
+
     if(!user) {
         req.flash('error', 'Email không tồn tại')
         res.redirect('back')
@@ -36,5 +48,6 @@ module.exports.loginPost = async (req, res, next) => {
         return
     }
 
+    res.cookie("token", user.token)
     res.redirect("/admin/dashboard")
 }
