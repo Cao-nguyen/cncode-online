@@ -14,18 +14,16 @@ const Product = new Schema({
     image: { type: String },
     slug: { type: String, slug: 'name', unique: true },
     deleted: { type: String, default: false },
-    deletedAt: { 
-        type: Date,
-        get: setDate
-    },
-    createdAt: { 
-        type: Date,
-        get: setDate
-    },
-    updatedAt: { 
-        type: Date,
-        get: setDate
+    createdBy: { 
+        account_id: { type: String },
+        createdAt: { 
+            type: String, 
+            default: Date.now
+        }
     }
+}, 
+{
+    timestamps: { default: true, get: setDate }
 }, { toJSON: { getters: true }, toObject: { getters: true } })
 
 module.exports = mongoose.model('Product', Product);

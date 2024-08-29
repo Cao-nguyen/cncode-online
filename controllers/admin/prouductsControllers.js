@@ -88,7 +88,10 @@ module.exports.createPost = async (req, res) => {
         
         const imageUrl = file.path;
         req.body.image = imageUrl;
-        req.body.createdAt = new Date();
+
+        req.body.createdBy = {
+            account_id: res.locals.user._id
+        }
         
         const product = new Product(req.body);
         await product.save();
