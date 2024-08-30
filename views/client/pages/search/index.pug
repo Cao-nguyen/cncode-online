@@ -1,0 +1,9 @@
+extends ../../layouts/default.pug 
+
+block main
+    .main 
+        if products.length > 0
+            each item in products 
+                a(href=item.slug) #{item.name}
+        else 
+            h1 Không có kết quả tìm kiếm nào như bạn nhập
