@@ -12,7 +12,7 @@
 }
 
 /* Header */
-header{
+header {
     width: 100%;
     height: 80px;
     display: flex;
@@ -22,28 +22,55 @@ header{
     box-shadow: var(--box-shadow-01);
 }
 
-header .logo img{
+header .logo img {
     padding-top: 5px;
     padding-left: 20px;
     padding-right: 30px;
     width: 70px;
 }
 
-header ul{
+header ul.menu {
     padding-top: 30px;
     display: flex;
 }
 
-header ul li{
+header ul.menu li {
     list-style: none;
     padding-right: 20px;
+    position: relative;
 }
 
-header ul li a{
+header ul.menu li a {
     text-decoration: none;
     color: var(--white-color);
     font-weight: bold;
 }
+
+/* Sub-menu styling */
+header ul.menu li.sub-menu:hover ul {
+    display: block;
+}
+
+header ul.menu li.sub-menu ul {
+    display: none;
+    position: absolute;
+    top: 40px; /* Adjust according to your needs */
+    left: 0;
+    background-color: var(--black-color);
+    box-shadow: var(--box-shadow-01);
+    padding: 10px 0;
+}
+
+header ul.menu li.sub-menu ul li {
+    padding: 10px 20px;
+    white-space: nowrap;
+}
+
+header ul.menu li.sub-menu ul li a {
+    color: var(--white-color);
+    font-weight: normal;
+}
+
 
 /* set */
 .container{

@@ -1,0 +1,16 @@
+extends ../../layouts/default.pug
+
+block main
+    .main
+        if(user.fullName)
+            p Họ tên: #{user.fullName}
+        if(user.email)
+            p Email: #{user.email}
+        if(user.status)
+            p Trạng thái: #{user.status === "active" ? "Hoạt động" : "Dừng hoạt động" }
+        if(role.name)
+            p Phân quyền: #{role.name}
+
+        a(
+            href="/admin/my-account/edit"
+        ) Chỉnh sử thông tin
