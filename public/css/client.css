@@ -203,6 +203,101 @@ h1.sp {
     margin: 40px 200px;
 }
 
+/* Container for the registration form */
+.register-container {
+    min-width: 500px;
+    margin: 50px auto;
+    padding: 20px;
+    background-color: #2C2C2C; /* Dark theme background */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    color: #FFF; /* Text color for dark theme */
+    font-family: Arial, sans-serif;
+}
+
+/* Heading style */
+.register-container h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+/* Form group styling */
+.register-container .form-group {
+    margin-bottom: 20px;
+}
+
+/* Label styling */
+.register-container label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+/* Input field styling */
+.register-container input[type="text"],
+.register-container input[type="email"],
+.register-container input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #3D3D3D;
+    border: 1px solid #444;
+    border-radius: 5px;
+    color: #FFF;
+    box-sizing: border-box;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.register-container input[type="text"]:focus,
+.register-container input[type="email"]:focus,
+.register-container input[type="password"]:focus {
+    background-color: #505050;
+    border-color: #777;
+    outline: none;
+}
+
+/* Wrapper for password input and toggle */
+.register-container .password-wrapper {
+    position: relative;
+}
+
+/* Toggle password visibility container */
+.register-container .toggle-password {
+    display: flex;
+    align-items: center;
+    margin-top: 10px;
+}
+
+/* Checkbox styling */
+.register-container .toggle-password input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+/* Toggle password label styling */
+.register-container .toggle-password label {
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* Submit button styling */
+.register-container button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-top: 20px;
+}
+
+.register-container button[type="submit"]:hover {
+    background-color: #45A049;
+}
+
 /* footer */
 footer{
     margin-top: 20px;

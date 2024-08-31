@@ -1,0 +1,42 @@
+extends ../../layouts/default.pug 
+
+block main 
+    .main
+        .register-container
+            h1 Đăng ký tài khoản
+            form(
+                action="/user/register" 
+                method="POST"
+            )
+                .form-group
+                    label(for="fullName") Họ và tên
+                    input#fullName(
+                        type="text" 
+                        name="fullName" 
+                        required 
+                        placeholder="Nhập họ và tên"
+                    )
+                .form-group
+                    label(for="email") Email
+                    input#email(
+                        type="email" 
+                        name="email" 
+                        required 
+                        placeholder="Nhập email"
+                    )
+                .form-group
+                    label(for="password") Mật khẩu
+                    .password-wrapper
+                        input#password(
+                            type="password" 
+                            name="password" 
+                            required 
+                            placeholder="Nhập mật khẩu"
+                        )
+                        .toggle-password
+                            input#togglePassword(type="checkbox")
+                            label(for="togglePassword") Hiện mật khẩu
+                .form-group
+                    button(
+                        type="submit"
+                    ) Đăng ký
