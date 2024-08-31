@@ -24,8 +24,12 @@ header
                     ) Tìm
         li 
             a(href="")
-             
-        li 
-            a(href="/user/register") Đăng ký
-        li 
-            a(href="/user/login") Đăng nhập
+        
+        if(user)    
+            li 
+                a(href="/user/logout") Đăng xuất
+        else
+            li 
+                a(href="/user/register") Đăng ký
+            li 
+                a(href="/user/login") Đăng nhập
