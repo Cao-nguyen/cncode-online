@@ -119,8 +119,8 @@ module.exports.forgotPasswordPost = async (req, res) => {
 
     const html = `
         Mã OTP của bạn là: <b>${otp}</b>
-        Thời hạn sử dụng của mã là 5 phút.
-        Lưu ý không chia sẻ mã này với bất kì người nào khác.
+        <br> Thời hạn sử dụng của mã là 5 phút.
+        <br> Lưu ý không chia sẻ mã này với bất kì người nào khác.
     `
 
     sendMailHelper.sendMail(email, subject, html)
@@ -181,4 +181,11 @@ module.exports.resetPasswordPost = async (req, res) => {
     })
 
     res.redirect('/')
+}
+
+// [GET] /user/:email
+module.exports.inforUser = async (req, res) => {
+    res.render('client/pages/user/inforUser', {
+        pageTitle: 'Trang thông tin'
+    })
 }

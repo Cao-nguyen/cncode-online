@@ -27,6 +27,8 @@ header
         
         if(user)    
             li 
+                a(href=`/user/@${user.email}`) #{user.fullName}
+            li 
                 a(href="/user/logout") Đăng xuất
         else
             li 
