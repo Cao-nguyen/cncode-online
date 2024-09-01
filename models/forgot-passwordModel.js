@@ -7,7 +7,7 @@ const forgotPassword = new Schema({
     otp: { type: String},
     expireAt: {
         type: Date,
-        expires: 20
+        expires: 1000
     },
     createdAt: {
         type: Date, 

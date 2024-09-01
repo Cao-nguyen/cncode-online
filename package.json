@@ -4,7 +4,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon --inspect=1929 index.js"
+    "dev": "nodemon --inspect=1930 index.js"
   },
   "author": "",
   "license": "ISC",
@@ -24,6 +24,7 @@
     "mongoose-slug-updater": "^3.3.0",
     "multer": "^1.4.5-lts.1",
     "multer-storage-cloudinary": "^4.0.0",
+    "nodemailer": "^6.9.14",
     "pug": "^3.0.3",
     "streamifier": "^0.1.1",
     "tinymce": "^6.7.0"

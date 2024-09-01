@@ -2,6 +2,7 @@ const md5 = require('md5')
 const User = require('../../models/usersModel')
 const ForgotPassword = require('../../models/forgot-passwordModel')
 const generateHelper = require('../../helpers/generate')
+const sendMailHelper = require('../../helpers/sendMail')
 
 // [GET] /user/register
 module.exports.user = async (req, res) => {
@@ -114,5 +115,70 @@ module.exports.forgotPasswordPost = async (req, res) => {
     const forgotPassword = new ForgotPassword(objectForgotPassword); 
     await forgotPassword.save();
 
-    res.send('Ok')
+    const subject = "MÃ OTP XÁC MINH LẤY LẠI MẬT KHẨU"
+
+    const html = `
+        Mã OTP của bạn là: <b>${otp}</b>
+        Thời hạn sử dụng của mã là 5 phút.
+        Lưu ý không chia sẻ mã này với bất kì người nào khác.
+    `
+
+    sendMailHelper.sendMail(email, subject, html)
+
+    res.redirect(`/user/password/otp?email=${email}`)
+}
+
+// [GET] /user/password/forgot
+module.exports.otpPassword = async (req, res) => {
+    const email = req.query.email 
+
+    res.render('client/pages/user/otp-password', {
+        pageTitle: ' Nhập mã OTP',
+        email: email
+    })
+}
+
+// [POST] /user/password/forgot
+module.exports.otpPasswordPost = async (req, res) => {
+    const email = req.body.email
+    const otp = req.body.otp 
+
+    const otpXT = await ForgotPassword.find({
+        email: email,
+        otp: otp
+    })
+
+    if(!otpXT) {
+        res.fash('error', 'OTP không hợp lệ')
+        res.redirect('back')
+    }
+
+    const user = await User.findOne({
+        email: email
+    })
+
+    res.cookie("tokenUser", user.tokenUser)
+
+    res.redirect('/user/password/reset')
+}
+
+// [GET] /user/password/reset
+module.exports.resetPassword = async (req, res) => {
+    res.render('client/pages/user/reset-password', {
+        pageTitle: 'Đổi mật khẩu'
+    })
+}
+
+// [POST] /user/password/reset
+module.exports.resetPasswordPost = async (req, res) => {
+    const password = req.body.password
+    const tokenUser = req.cookies.tokenUser
+
+    await User.updateOne({
+        tokenUser: tokenUser
+    }, {
+        password: md5(password)
+    })
+
+    res.redirect('/')
 }
