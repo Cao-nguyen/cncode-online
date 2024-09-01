@@ -1,0 +1,71 @@
+extends ../../layouts/default.pug 
+
+block main 
+    .main 
+        -   if (messages.error)
+                div(
+                    class="message-error"
+                    show-alert 
+                    data-time="5000"
+                ) #{messages.error} <i class="fa-solid fa-x" close></i>
+
+        form(
+            action="/admin/settings/general?_method=PATCH"
+            method="POST"
+        )
+            .form-group 
+                label(for="title") Tên website
+                input(
+                    type="text"
+                    class="form-item"
+                    id="title"
+                    name="websiteName"
+                    value=general.websiteName
+                    required 
+                ) 
+            .form-group 
+                label(for="title") Số điện thoại
+                input(
+                    type="text"
+                    class="form-item"
+                    id="title"
+                    name="phone"
+                    value=general.phone
+                    required 
+                ) 
+            .form-group 
+                label(for="title") Email
+                input(
+                    type="text"
+                    class="form-item"
+                    id="title"
+                    name="email"
+                    value=general.email
+                    required 
+                ) 
+            .form-group 
+                label(for="title") Địa chỉ
+                input(
+                    type="text"
+                    class="form-item"
+                    id="title"
+                    name="address"
+                    value=general.address
+                    required 
+                ) 
+            .form-group 
+                label(for="title") Bản quyền
+                input(
+                    type="text"
+                    class="form-item"
+                    id="title"
+                    name="copyright"
+                    value=general.copyright
+                    required 
+                ) 
+            
+            .form-group 
+                button(
+                    type="submit"
+                    class="new-create"
+                ) Cập nhật
