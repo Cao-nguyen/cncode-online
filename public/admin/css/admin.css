@@ -48,6 +48,51 @@ header .admin h2{
   }
 
 
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: Arial, sans-serif;
+  }
+
+  .main-db{
+    margin-top: 100px;
+    margin-left: 230px;
+    margin-bottom: 0px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-content: space-between;
+  }
+  
+  .account-info {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    width: 500px;
+    margin: 20px auto; /* Căn giữa */
+  }
+  
+  .account-info__header {
+    font-weight: bold;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+  }
+  
+  .account-info__details {
+    margin-top: 10px;
+  }
+  
+  .account-info__row {
+    display: flex; /* Sử dụng flex để label và value cùng hàng */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    margin-bottom: 8px;
+  }
+
+
 
 /* sider */
 .sider{

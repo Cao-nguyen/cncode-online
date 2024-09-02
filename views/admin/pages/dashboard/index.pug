@@ -1,3 +1,47 @@
 extends ../../layouts/default.pug
 
 block main 
+    .main-db
+        .account-info
+            .account-info__header Thông tin tài khoản
+            .account-info__details
+                .account-info__row
+                p Họ và tên: <b>#{user.fullName}</b>
+                .account-info__row
+                p Email: <b>#{user.email}</b>
+                .account-info__row
+                p Quyền: <b>#{role.name}</b>
+    
+    .main-db
+        .account-info
+            .account-info__header Danh mục
+            .account-info__details
+                .account-info__row
+                p Số lượng: <b>#{statistc.category.total}</b>
+        
+        .account-info
+            .account-info__header Sản phẩm
+            .account-info__details
+                .account-info__row
+                p Số lượng: <b>#{statistc.products.total}</b>
+
+    .main-db
+        .account-info
+            .account-info__header Tài khoản admin
+            .account-info__details
+                .account-info__row
+                p Số lượng: <b>#{statistc.account.total}</b>
+                .account-info__row
+                p Hoạt động: <b>#{statistc.account.active}</b>
+                .account-info__row
+                p Dừng hoạt động: <b>#{statistc.account.inactive}</b>
+        
+        .account-info
+            .account-info__header Tài khoản người dùng
+            .account-info__details
+                .account-info__row
+                p Số lượng: <b>#{statistc.user.total}</b>
+                .account-info__row
+                p Hoạt động: <b>#{statistc.user.active}</b>
+                .account-info__row
+                p Dừng hoạt động: <b>#{statistc.user.inactive}</b>
