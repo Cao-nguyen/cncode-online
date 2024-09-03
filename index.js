@@ -53,10 +53,7 @@ app.get('*', (req, res) => {
 // Socket.io
 const server = http.createServer(app)
 const io = new Server(server)
-
-io.on('connection', (socket) => {
-    console.log('a user connected', socket.id)
-})
+global._io = io
 
 server.listen(port, () => {
     console.log(`App listening on port ${port}`)

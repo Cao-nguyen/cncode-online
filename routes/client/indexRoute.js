@@ -5,6 +5,7 @@ const userRoutes = require('./userRoute')
 const chatRoutes = require('./chatRoute')
 const userMiddleware = require('../../middlewares/client/user')
 const settingsGeneralMiddleware = require('../../middlewares/client/settingsGeneral')
+const authMiddleware = require('../../middlewares/client/auth')
 
 module.exports = (app) => {
     app.use(userMiddleware.inforUser)
@@ -13,5 +14,5 @@ module.exports = (app) => {
     app.use('/products', productsRoutes)
     app.use('/search', searchRoutes)
     app.use('/user', userRoutes)
-    app.use('/chat', chatRoutes)
+    app.use('/chat', authMiddleware.requireAuth, chatRoutes)
 }
