@@ -40,26 +40,6 @@ module.exports.dashboard = async (req, res, next) => {
         deleted: false
     })
 
-    // statistc.account.active = await Account.count({
-    //     deleted: false,
-    //     status: active
-    // })
-
-    // statistc.user.active = await User.count({
-    //     deleted: false,
-    //     status: active
-    // })
-
-    // statistc.account.inactive = await Account.count({
-    //     deleted: false,
-    //     status: inactive
-    // })
-
-    // statistc.user.inactive = await User.count({
-    //     deleted: false,
-    //     status: inactive
-    // })
-
     res.render('admin/pages/dashboard/index', { 
         pageTitle: 'Tổng quan',
         statistc: statistc
