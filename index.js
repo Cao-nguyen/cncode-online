@@ -8,6 +8,8 @@ const methodOverride = require('method-override')
 const route = require('./routes/client/indexRoute')
 const routeAdmin = require('./routes/admin/indexRoute')
 const db = require('./config/database')
+const { Server } = require('socket.io')
+const http = require('http')
 require('dotenv').config()
 const app = express()
 const port = process.env.PORT
@@ -48,6 +50,14 @@ app.get('*', (req, res) => {
     })
 })
 
-app.listen(port, () => {
+// Socket.io
+const server = http.createServer(app)
+const io = new Server(server)
+
+io.on('connection', (socket) => {
+    console.log('a user connected', socket.id)
+})
+
+server.listen(port, () => {
     console.log(`App listening on port ${port}`)
 })

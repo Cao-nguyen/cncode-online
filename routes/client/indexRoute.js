@@ -1,7 +1,8 @@
 const homeRoutes = require('./homeRoute')
 const productsRoutes = require('./productsRoute')
-const search = require('./searchRoute')
-const user = require('./userRoute')
+const searchRoutes = require('./searchRoute')
+const userRoutes = require('./userRoute')
+const chatRoutes = require('./chatRoute')
 const userMiddleware = require('../../middlewares/client/user')
 const settingsGeneralMiddleware = require('../../middlewares/client/settingsGeneral')
 
@@ -10,6 +11,7 @@ module.exports = (app) => {
     app.use(settingsGeneralMiddleware.settingsGeneral)
     app.use('/', homeRoutes)
     app.use('/products', productsRoutes)
-    app.use('/search', search)
-    app.use('/user', user)
+    app.use('/search', searchRoutes)
+    app.use('/user', userRoutes)
+    app.use('/chat', chatRoutes)
 }
