@@ -11,6 +11,7 @@ if (formSendData) {
         if (content) {
             socket.emit("CLIENT_SEND_MESSAGE", content);
             e.target.elements.content.value = ""
+            socket.emit("CLIENT_SEND_TYPING", "hidden")
         }
     });
 }
@@ -18,6 +19,7 @@ if (formSendData) {
 // SERVER_RETURN_MESSAGE
 socket.on("SERVER_RETURN_MESSAGE", (data) => {
     const body = document.querySelector(".chat-area .messages")
+    const boxTyping = document.querySelector('.list-typing')
 
     const div = document.createElement("div") 
     div.classList.add("message", "received")
@@ -26,7 +28,7 @@ socket.on("SERVER_RETURN_MESSAGE", (data) => {
         <div class="message-chat">${data.content}</div>
     `
 
-    body.appendChild(div)
+    body.insertBefore(div, boxTyping)
 
     bodyChat.scrollTop = bodyChat.scrollHeight
 })
@@ -57,5 +59,51 @@ if(emojiPicker) {
         const icon = event.detail.unicode
 
         inputChat.value = inputChat.value + icon
+    })
+
+    var timeOut
+
+    inputChat.addEventListener("keyup", () => {
+        socket.emit("CLIENT_SEND_TYPING", "show")
+
+        clearTimeout(timeOut)
+
+        timeOut = setTimeout(() => {
+            socket.emit("CLIENT_SEND_TYPING", "hidden")
+        }, 5000)
+    })
+}
+
+
+// SERVER_RETURN_TYPING
+const elementsListTyping = document.querySelector(".messages .list-typing")
+if(elementsListTyping) {
+    socket.on("SERVER_RETURN_TYPING", (data) => {
+        if(data.type == "show") {
+            const existTyping = elementsListTyping.querySelector(`[user-id="${data.userId}"]`) 
+
+            if(!existTyping) {
+                const boxTyping = document.createElement("div")
+                boxTyping.classList.add("box-typing")
+                boxTyping.setAttribute("user-id", data.userId)
+                boxTyping.innerHTML=`
+                    <div class="box-typing">
+                        <div class="typing-name">${data.fullName}</div>
+                        <div class="typing-dots"> 
+                            <span> </span>
+                            <span> </span>
+                            <span></span>
+                        </div>
+                    </div>
+                `
+
+                elementsListTyping.appendChild(boxTyping)
+            }
+        } else {
+            const boxTypingRemove = elementsListTyping.querySelector(`[user-id="${data.userId}"]`) 
+            if(boxTypingRemove) {
+                elementsListTyping.removeChild(boxTypingRemove)
+            }
+        }
     })
 }
