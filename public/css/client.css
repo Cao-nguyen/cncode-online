@@ -338,23 +338,13 @@ h1.sp {
   font-weight: bold;
 }
 
-.received p {
+.message-chat {
   max-width: 70%;
   padding: 10px 15px;
   background-color: #f0f0f0;
   color: #333;
   border-radius: 18px 18px 18px 0;
   margin-right: auto;
-  word-break: break-word;
-}
-
-.sent p {
-  max-width: 70%;
-  padding: 10px 15px;
-  background-color: #ff5e8d;
-  color: white;
-  border-radius: 18px 18px 0 18px;
-  margin-left: auto;
   word-break: break-word;
 }
 

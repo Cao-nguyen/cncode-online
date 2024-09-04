@@ -4,32 +4,22 @@ block main
     .contab
         .chat-area
             .messages
-                .message.received
-                    .message-content Em Yêu
-                    p A ơi sang nhà em nha, nhà em không có ai ở nhà cả
-                .message.received
-                    .message-content Em Yêu
-                    p Nhanh nha nhanh nha
-                .message.sent
-                    .message-content
-                    p Thế à? Ok e iu
-                .message.sent
-                    .message-content
-                    p Ck đến rồi mà thấy ai ở nhà đâu e? Khóa cửa mà :(
-                .message.received
-                    .message-content Em Yêu
-                    p Thì em bảo nhà em không ai ở nhà mà :))
+                each chat in chats
+                    .message.received
+                        .message-content #{chat.inforUser.fullName}
+                        .message-chat #{chat.content}
+                
                 .message-input
-                    form(
-                        class="message-input"
-                        action=""
-                    )
-                        input(
-                            class="ip-chat" 
-                            type="text" 
-                            placeholder="Nhập nội dung..."
-                            name="content"
-                        )
-                        button.send-btn
-                            <i class="fa-solid fa-arrow-right"></i>
+                            form(
+                                class="message-input"
+                                action=""
+                            )
+                                input(
+                                    class="ip-chat" 
+                                    type="text" 
+                                    placeholder="Nhập nội dung..."
+                                    name="content"
+                                )
+                                button.send-btn
+                                    <i class="fa-solid fa-arrow-right"></i>
 
