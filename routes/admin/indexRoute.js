@@ -8,8 +8,11 @@ const myAccountRoutes = require('./myAccountRoute')
 const settingsRoutes = require('./settingsRoute')
 
 const authMiddleware = require("../../middlewares/admin/auth")
+const authControllers = require('../../controllers/admin/authControllers')
 
 module.exports = (app) => {
+    app.get("/admin", authControllers.login)
+
     app.use('/admin/dashboard', authMiddleware.requireAuth, dashboardRoutes)
     app.use('/admin/products', authMiddleware.requireAuth, productsRoutes)
     app.use('/admin/category', authMiddleware.requireAuth, categoryRoutes)
