@@ -379,10 +379,11 @@ h1.sp {
 }
 
 .send-btn {
+    margin-right: 5px;
     padding: 10px;
     background-color: #e74c3c;
     border: none;
-    border-radius: 50%;
+    border-radius: 10px;
     color: white;
     cursor: pointer;
     display: flex;
@@ -399,6 +400,10 @@ h1.sp {
 
 .send-btn i {
     font-size: 16px;
+}
+
+.tooltip:not(.shown) {
+    display: none;
 }
 
 /* footer */
