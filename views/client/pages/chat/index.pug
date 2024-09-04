@@ -9,17 +9,19 @@ block main
                         .message-content #{chat.inforUser.fullName}
                         .message-chat #{chat.content}
                 
-                .message-input
-                            form(
-                                class="message-input"
-                                action=""
-                            )
-                                input(
-                                    class="ip-chat" 
-                                    type="text" 
-                                    placeholder="Nhập nội dung..."
-                                    name="content"
-                                )
-                                button.send-btn
-                                    <i class="fa-solid fa-arrow-right"></i>
+            .message-input
+                form(
+                    class="message-input"
+                    action=""
+                )
+                    textarea(
+                        class="ip-chat" 
+                        type="text" 
+                        style="resize: none"
+                        placeholder="Nhập nội dung..."
+                        name="content"
+                        autocomplete="off"
+                    )
+                    button.send-btn
+                        <i class="fa-solid fa-arrow-right"></i>
 
