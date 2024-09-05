@@ -1,0 +1,129 @@
+#editor-container {
+  width: 100%;
+  margin: 20px 0;
+}
+
+#toolbar {
+  background-color: #f4f4f4;
+  border: 1px solid #ccc;
+  padding: 5px;
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  border-radius: 4px;
+  flex-wrap: wrap;
+}
+
+#toolbar span {
+  padding: 8px;
+  cursor: pointer;
+  background-color: #fff;
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+#toolbar span.active {
+  background-color: #ddd;
+  font-weight: bold;
+}
+
+#toolbar span:hover {
+  background-color: #eee;
+}
+
+#editor {
+  width: 100%;
+  height: 300px;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow-y: auto;
+  background-color: white;
+}
+
+/* Highlighting code blocks with Prism.js */
+pre[class*="language-"] {
+  background: #2d2d2d;
+  padding: 15px;
+  border-radius: 4px;
+  color: #f8f8f2;
+}
+
+/* Áp dụng cho phần tử pre và code */
+pre, code {
+  background-color: #f5f2f0; /* Màu nền chung */
+  padding: 10px;
+  border-radius: 5px;
+  font-family: 'Courier New', Courier, monospace;
+  white-space: pre-wrap; /* Cho phép xuống dòng tự động */
+  word-wrap: break-word; /* Xuống dòng nếu từ quá dài */
+}
+
+/* Đảm bảo các dòng không bị tách biệt khi xuống hàng */
+pre code {
+  display: block;
+  padding: 0;
+  margin: 0;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: #999;
+}
+
+.token.punctuation {
+  color: #f8f8f2;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: #f92672;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.url,
+.token.inserted {
+  color: #a6e22e;
+}
+
+.token.atrule,
+.token.function,
+.token.class-name {
+  color: #e6db74;
+}
+
+.token.keyword {
+  color: #66d9ef;
+}
+
+.token.operator,
+.token.entity,
+.token.regex,
+.token.important,
+.token.variable {
+  color: #fd971f;
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
