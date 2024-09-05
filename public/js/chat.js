@@ -2,7 +2,6 @@ import * as Popper from 'https://cdn.jsdelivr.net/npm/@popperjs/core@^2/dist/esm
 
 // CLIENT_SEND_MESSAGE
 const formSendData = document.querySelector(".chat-area .message-input");
-
 if (formSendData) {
     formSendData.addEventListener('submit', (e) => {
         e.preventDefault();
@@ -35,7 +34,6 @@ socket.on("SERVER_RETURN_MESSAGE", (data) => {
 
 // Scroll Chat 
 const bodyChat = document.querySelector(".chat-area .messages")
-
 if(bodyChat) {
     bodyChat.scrollTop = bodyChat.scrollHeight
 }
@@ -83,6 +81,7 @@ if(elementsListTyping) {
             const existTyping = elementsListTyping.querySelector(`[user-id="${data.userId}"]`) 
 
             if(!existTyping) {
+                const bodyChat = document.querySelector(".chat-area .messages")
                 const boxTyping = document.createElement("div")
                 boxTyping.classList.add("box-typing")
                 boxTyping.setAttribute("user-id", data.userId)
@@ -98,6 +97,7 @@ if(elementsListTyping) {
                 `
 
                 elementsListTyping.appendChild(boxTyping)
+                bodyChat.scrollTop = bodyChat.scrollHeight
             }
         } else {
             const boxTypingRemove = elementsListTyping.querySelector(`[user-id="${data.userId}"]`) 
