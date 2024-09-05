@@ -11,7 +11,7 @@ if (formSendData) {
             socket.emit("CLIENT_SEND_MESSAGE", content);
             e.target.elements.content.value = ""
             socket.emit("CLIENT_SEND_TYPING", "hidden")
-        }
+        } 
     });
 }
 
