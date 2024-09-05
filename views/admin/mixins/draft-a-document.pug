@@ -1,28 +1,8 @@
 mixin text-editor
     .editor-container
-        #toolbar
-            span.bold(type="button" title="In đậm (Ctrl+B)")
-                i.fas.fa-bold
-            span.italic(type="button" title="In nghiêng (Ctrl+I)")
-                i.fas.fa-italic
-            span.underline(type="button" title="Gạch chân (Ctrl+U)")
-                i.fas.fa-underline
-            span.align-left(type="button" title="Căn trái (Ctrl+L)")
-                i.fas.fa-align-left
-            span.align-center(type="button" title="Căn giữa (Ctrl+E)")
-                i.fas.fa-align-center
-            span.align-right(type="button" title="Căn phải (Ctrl+R)")
-                i.fas.fa-align-right
-            span.align-justify(type="button" title="Căn đều (Ctrl+J)")
-                i.fas.fa-align-justify
-            span.insert-image(type="button" title="Chèn ảnh (Ctrl+Shift+I)")
-                i.fas.fa-image
-            span.insert-table(type="button" title="Chèn bảng (Ctrl+T)")
-                i.fas.fa-table
-            span.quote(type="button" title="Trích dẫn (Ctrl+Q)")
-                i.fas.fa-quote-left
-            span.code(type="button" title="Mã nguồn (Ctrl+K)")
-                i.fas.fa-code
-            span.list(type="button" title="Danh sách (Ctrl+L)")
-                i.fas.fa-list-ul
-        #editor(name="content" contenteditable="true")
+        .toolbar
+          span.bold B
+          span.italic I
+          span.underline U
+          // Thêm các thẻ khác tại đây
+        .editor(name="content" contenteditable="true")

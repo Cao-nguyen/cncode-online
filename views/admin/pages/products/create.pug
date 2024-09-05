@@ -47,12 +47,13 @@ block main
                         +select-tree(category)
             .form-group 
                 label(for="desc") Nội dung bài viết
-                textarea(
-                    type="text"
-                    class="form-item tinymce"
-                    id="desc"
-                    name="content"
-                ) 
+                //- textarea(
+                //-     type="text"
+                //-     class="form-item tinymce"
+                //-     id="desc"
+                //-     name="content"
+                //- ) 
+                +text-editor
             .form-group(upload-image)
                 label(for="img") Chọn ảnh
                 input(
