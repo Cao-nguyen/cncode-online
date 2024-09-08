@@ -11,6 +11,10 @@
     --box-shadow-01: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
+body {
+    overflow-x: hidden;
+}
+
 /* Header */
 header { 
     width: 100%;
@@ -76,6 +80,7 @@ header ul.menu li.sub-menu ul li a {
 .container{
     margin: 0px 100px;
     padding-top: 80px;
+    overflow-x: hidden;
 }
 
 /* Sản phẩm */

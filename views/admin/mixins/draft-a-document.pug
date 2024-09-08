@@ -1,8 +1,11 @@
-mixin text-editor
-    .editor-container
-        .toolbar
-          span.bold B
-          span.italic I
-          span.underline U
-          // Thêm các thẻ khác tại đây
-        .editor(name="content" contenteditable="true")
+mixin text-editor(name)
+  .text-editor-container
+    .toolbar
+      button(type="button", id="bold-btn") B
+      button(type="button", id="italic-btn") I
+      button(type="button", id="underline-btn") U
+      button(type="button", id="align-left-btn") Trái
+      button(type="button", id="align-center-btn") Giữa
+      button(type="button", id="align-right-btn") Phải
+      button(type="button", id="align-justify-btn") Đều
+    .editor(contenteditable="true", id="editor", name=name, style="min-height: 200px; border: 1px solid #ccc; padding: 10px;")

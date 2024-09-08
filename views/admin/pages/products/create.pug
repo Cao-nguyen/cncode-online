@@ -3,16 +3,15 @@ include ../../mixins/select-tree.pug
 include ../../mixins/draft-a-document.pug
 
 block main 
-
     .main 
-        -   if (messages.validate)
-                div(
-                    class="message-validate"
-                    show-alert 
-                    data-time="5000"
-                ) #{messages.validate} <i class="fa-solid fa-x" close></i>
+        - if (messages.validate)
+            div(
+                class="message-validate"
+                show-alert 
+                data-time="5000"
+            ) #{messages.validate} <i class="fa-solid fa-x" close></i>
                 
-        -   if (messages.create)
+        - if (messages.create)
             div(
                 class="message-create"
                 show-alert 
@@ -47,13 +46,7 @@ block main
                         +select-tree(category)
             .form-group 
                 label(for="desc") Nội dung bài viết
-                //- textarea(
-                //-     type="text"
-                //-     class="form-item tinymce"
-                //-     id="desc"
-                //-     name="content"
-                //- ) 
-                +text-editor
+                +text-editor(name="content")
             .form-group(upload-image)
                 label(for="img") Chọn ảnh
                 input(
