@@ -1,5 +1,4 @@
 extends ../../layouts/default.pug 
-link(rel="stylesheet", href="/css/client.css")
 
 block main 
     .contab
@@ -31,7 +30,7 @@ block main
         div(class="tooltip" role="tooltip")
             emoji-picker
 
-
+    link(rel="stylesheet", href="/css/client.css")
     script(src="/socket.io/socket.io.js")
     script(src="/js/socket.js")
     script(type="module" src="/js/chat.js")
